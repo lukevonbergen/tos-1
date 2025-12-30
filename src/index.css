@@ -220,7 +220,6 @@ a:hover {
   bottom: 0;
   background-size: cover;
   background-position: center;
-  background-attachment: fixed;
 }
 
 .hero-overlay {
@@ -596,7 +595,6 @@ section {
   bottom: 0;
   background-size: cover;
   background-position: center;
-  background-attachment: fixed;
 }
 
 .banner-overlay {
