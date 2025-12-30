@@ -45,7 +45,7 @@ const WhatsOn = () => {
       schedule: 'Daily',
       time: 'All day',
       description: 'Challenge your mates to a game of pool or darts. Tables available all week.',
-      image: 'https://images.unsplash.com/photo-1626768886345-ed46ed4e6e0e?q=80&w=2070',
+      image: 'https://images.unsplash.com/photo-1652216024518-2ebe866c2fe9?q=80&w=2670&auto=format&fit=crop',
     },
     {
       title: 'Quiz Night',
