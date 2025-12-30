@@ -1,0 +1,168 @@
+import React from 'react';
+import { Helmet } from 'react-helmet';
+import PageHero from '../components/PageHero';
+import SectionContainer from '../components/SectionContainer';
+import EventCard from '../components/EventCard';
+import { Link } from 'react-router-dom';
+
+const Events = () => {
+  const upcomingEvents = [
+    {
+      title: "Live Music Friday Beaconsfield",
+      date: "Every Friday",
+      time: "9:30 PM - Midnight",
+      description: "Experience live music performances from talented local artists every Friday night in Beaconsfield. From acoustic sets to full bands, enjoy an evening of great music, drinks, and atmosphere at the best live music venue in HP9.",
+      imageSrc: "/images/The_Swan_LiveMusic_1.JPG",
+      isRecurring: true
+    },
+    {
+      title: "Live Music Saturday Beaconsfield",
+      date: "Every Saturday",
+      time: "9:30 PM - Midnight",
+      description: "Saturday nights come alive with our regular live music Beaconsfield sessions. Dance, sing along, or simply relax with friends while enjoying performances from diverse musical genres at HP9's premier live music pub.",
+      imageSrc: "/images/The_Swan_LiveMusic_2.JPG",
+      isRecurring: true
+    },
+    {
+      title: "Food Theme Nights",
+      date: "Keep an eye on social media and website for dates",
+      time: "6:00 PM - 9:00 PM",
+      description: "Join us for our exciting Food Theme Nights! Each event features a different culinary delight. From chilli nights to seafood platters, steak nights to mexican feasts. Check our weekly menu for the current theme.",
+      imageSrc: "/images/af0e0fa9-f763-448f-ab33-7ef773394ba1.JPG",
+      isRecurring: true
+    }
+  ];
+
+  const privateEvents = [
+    {
+      title: "Wedding Receptions",
+      description: "Celebrate your special day in our beautifully appointed function room. We can accommodate up to 80 guests for wedding breakfasts and evening receptions."
+    },
+    {
+      title: "Corporate Events",
+      description: "Professional meeting spaces with full catering services. Perfect for business lunches, team building events, and corporate celebrations."
+    },
+    {
+      title: "Birthday Parties",
+      description: "Make your birthday memorable with a private celebration at The Old Swan. We offer flexible packages for all ages and group sizes."
+    },
+    {
+      title: "Funeral Wakes",
+      description: "Provide comfort to family and friends during difficult times. Our caring staff will ensure your gathering is handled with sensitivity and respect."
+    },
+    {
+      title: "Outside Catering for Parties",
+      description: "Take your celebration anywhere with our outside catering service. From intimate gatherings to large events, we bring the culinary adventure to you with professional service and exceptional food."
+    }
+  ];
+
+  return (
+    <main className="pt-32">
+      <Helmet>
+        <title>Events & Live Music Beaconsfield - Friday & Saturday Nights | The Old Swan HP9</title>
+        <meta name="description" content="Live music Beaconsfield every Friday & Saturday at The Old Swan. Local bands, acoustic nights, food theme nights & private events. Best entertainment in HP9!" />
+        <meta name="keywords" content="live music Beaconsfield, events Beaconsfield, music nights HP9, entertainment Beaconsfield, acoustic music near me, local bands Beaconsfield, private events HP9, weekend entertainment" />
+        <meta property="og:title" content="Live Music & Events at The Old Swan Beaconsfield - Every Weekend" />
+        <meta property="og:description" content="Join us for live music every Friday & Saturday night in Beaconsfield. Local bands, themed food nights, and private events at The Old Swan HP9." />
+        <meta property="og:type" content="events" />
+        <link rel="canonical" href="https://theoldswanbeaconsfield.co.uk/events" />
+      </Helmet>
+      <PageHero
+        title="Live Music & Events Beaconsfield"
+        subtitle="From live music Beaconsfield nights to themed food experiences and special celebrations, there's always something happening at The Old Swan HP9. Join our community for memorable evenings of entertainment, great food, and good company."
+        imageSrc="/images/oct_25/beer-taps.jpg"
+        imageAlt="Events and gatherings at The Old Swan"
+        textAlign="left"
+      />
+
+      {/* SEO H1 */}
+      <h1 className="sr-only">Live Music Beaconsfield & Events at The Old Swan HP9 - Friday & Saturday Night Entertainment, Local Bands & Private Functions</h1>
+      
+      {/* Upcoming Events */}
+      <SectionContainer>
+        <h2 className="text-3xl md:text-4xl font-normal mb-12 text-brand-dark text-center">
+          Live Music Beaconsfield & Upcoming Events
+        </h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {upcomingEvents.map((event, index) => (
+            <EventCard key={index} {...event} />
+          ))}
+        </div>
+      </SectionContainer>
+
+      {/* Private Events */}
+      <SectionContainer background="gray">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-12">
+          <div>
+            <h2 className="text-3xl md:text-4xl font-normal mb-6 text-brand-dark">
+              Private Events Beaconsfield
+            </h2>
+            <p className="text-lg text-brand-gray mb-8 leading-relaxed">
+              The Old Swan is the perfect venue for your special occasions in Beaconsfield and HP9. Our experienced events team will work with you to create memorable celebrations and private events that your guests will talk about for years to come.
+            </p>
+            <div className="space-y-6">
+              {privateEvents.map((event, index) => (
+                <div key={index} className="border-l-4 border-brand-dark pl-6">
+                  <h3 className="text-xl font-normal text-brand-dark mb-2">
+                    {event.title}
+                  </h3>
+                  <p className="text-brand-gray leading-relaxed">
+                    {event.description}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </div>
+          <div>
+            <img 
+              src="/images/40571662-feaf-4f84-b531-ee22c7b42298.JPG" 
+              alt="Private dining space at The Old Swan"
+              className="w-full h-[500px] object-cover rounded-lg shadow-lg"
+            />
+          </div>
+        </div>
+
+        <div className="bg-white p-8 md:p-12 rounded-lg text-center">
+          <h3 className="text-2xl font-normal text-brand-dark mb-4">
+            Planning a Private Event?
+          </h3>
+          <p className="text-lg text-brand-gray mb-6 max-w-2xl mx-auto">
+            Get in touch with our events team to discuss your requirements. We'll help you create the perfect celebration.
+          </p>
+          <Link to="/contact" className="nav-link text-xl font-bold">
+            Contact Events Team
+          </Link>
+        </div>
+      </SectionContainer>
+
+      {/* Newsletter Signup */}
+      <SectionContainer>
+        <div className="text-center">
+          <h2 className="text-2xl md:text-3xl font-normal mb-4 text-brand-dark">
+            Stay Updated
+          </h2>
+          <p className="text-lg text-brand-gray mb-8 max-w-2xl mx-auto">
+            Subscribe to our newsletter to be the first to know about upcoming events, special offers, and seasonal menu changes.
+          </p>
+          <div className="max-w-md mx-auto">
+            <div className="flex flex-col sm:flex-row gap-4">
+              <input 
+                type="email" 
+                placeholder="Your email address"
+                className="flex-1 px-4 py-3 border border-gray-300 rounded focus:outline-none focus:border-brand-dark font-serif"
+              />
+              <button className="nav-link text-xl font-bold">
+                Subscribe
+              </button>
+            </div>
+            <p className="text-sm text-brand-gray mt-3">
+              We respect your privacy and never share your information.
+            </p>
+          </div>
+        </div>
+      </SectionContainer>
+    </main>
+  );
+};
+
+export default Events;
