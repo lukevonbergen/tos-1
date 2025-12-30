@@ -1,151 +1,280 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Helmet } from 'react-helmet';
-import HeroSection from '../components/HeroSection';
-import AboutSection from '../components/AboutSection';
-import SectionContainer from '../components/SectionContainer';
-import TestimonialCard from '../components/TestimonialCard';
 import { Link } from 'react-router-dom';
 
 const Home = () => {
-  const testimonials = [
-    {
-      quote: "Absolutely fantastic food and service. The Sunday roast was perfection - tender beef, crispy potatoes, and the Yorkshire puddings were divine!",
-      author: "Sarah Mitchell",
-      location: "Local Resident",
-      rating: 5
-    },
-    {
-      quote: "The Old Swan has been our family's go-to pub for celebrations for over 20 years. Always consistently excellent food and the warmest welcome.",
-      author: "James Thompson",
-      location: "Beaconsfield",
-      rating: 5
-    },
-    {
-      quote: "Wonderful atmosphere for our anniversary dinner. The staff went above and beyond to make our evening special. Highly recommended!",
-      author: "Emma & David Clarke",
-      location: "High Wycombe",
-      rating: 5
-    }
-  ];
+  // Scroll reveal animation
+  useEffect(() => {
+    const reveals = document.querySelectorAll('.reveal');
 
-  const features = [
-    {
-      icon: "🍺",
-      title: "Traditional Ales",
-      description: "Hand-pulled ales from local breweries, plus a carefully curated selection of wines and spirits."
-    },
-    {
-      icon: "🍽️",
-      title: "Fresh, Local Food",
-      description: "Seasonal menus featuring the finest local ingredients, from classic pub fare to modern British cuisine."
-    },
-    {
-      icon: "🎵",
-      title: "Live Entertainment",
-      description: "Live sports, live music sessions, and special events throughout the year."
-    }
-  ];
+    const revealOnScroll = () => {
+      reveals.forEach(element => {
+        const windowHeight = window.innerHeight;
+        const elementTop = element.getBoundingClientRect().top;
+        const revealPoint = 150;
+
+        if (elementTop < windowHeight - revealPoint) {
+          element.classList.add('visible');
+        }
+      });
+    };
+
+    window.addEventListener('scroll', revealOnScroll);
+    revealOnScroll(); // Initial check
+
+    return () => window.removeEventListener('scroll', revealOnScroll);
+  }, []);
 
   return (
-    <main className="pt-32">
+    <main>
       <Helmet>
-        <title>The Old Swan Beaconsfield - Traditional Pub, Food & Live Music | HP9</title>
-        <meta name="description" content="The Old Swan Beaconsfield - Award-winning traditional British pub with locally sourced food, hand-pulled ales, live music & events. Best pub Beaconsfield HP9. Book now!" />
-        <meta name="keywords" content="pub Beaconsfield, traditional pub Beaconsfield, best pub Beaconsfield, food Beaconsfield, live music Beaconsfield, British pub HP9, pubs near me, The Old Swan" />
-        <meta property="og:title" content="The Old Swan Beaconsfield - Traditional British Pub & Restaurant" />
-        <meta property="og:description" content="Experience traditional British hospitality at The Old Swan Beaconsfield. Fresh local food, craft ales, live music events. 175+ years of tradition in HP9." />
+        <title>Annie Twomey's | Irish Pub Southgate, London | Live Sport & Music</title>
+        <meta name="description" content="Annie Twomey's - Family-run Irish pub in Southgate, London. Live sport on multiple screens, pool, darts, and live music every weekend. Experience authentic Irish hospitality." />
+        <meta name="keywords" content="Irish pub Southgate, live sport pub London, pool darts pub, live music Southgate, Annie Twomey's, GAA London, Premier League pub" />
+        <meta property="og:title" content="Annie Twomey's | Irish Pub Southgate" />
+        <meta property="og:description" content="Family-run Irish pub with live sport, pool, darts, and live music. In the heart of Southgate, London." />
         <meta property="og:type" content="restaurant" />
-        <meta property="og:url" content="https://theoldswanbeaconsfield.co.uk" />
-        <meta name="geo.region" content="GB-BKM" />
-        <meta name="geo.placename" content="Beaconsfield" />
-        <meta name="geo.position" content="51.608;-0.643" />
-        <meta name="ICBM" content="51.608, -0.643" />
-        <link rel="canonical" href="https://theoldswanbeaconsfield.co.uk" />
+        <link rel="canonical" href="https://annietwomeys.co.uk" />
       </Helmet>
-      <HeroSection />
-      <AboutSection />
-      
-      {/* SEO H1 - Hidden but present for search engines */}
-      <h1 className="sr-only">The Old Swan Beaconsfield - Traditional British Pub with Live Music, Local Food & Best Ales in HP9</h1>
-      
-      {/* Features Section */}
-      <SectionContainer>
-        <h2 className="text-3xl md:text-4xl font-normal mb-12 text-brand-dark text-center">
-          What Makes Us Special
-        </h2>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {features.map((feature, index) => (
-            <div key={index} className="text-center">
-              <h3 className="text-xl font-normal text-brand-dark mb-4">
-                {feature.title}
-              </h3>
-              <p className="text-brand-gray leading-relaxed">
-                {feature.description}
-              </p>
+
+      {/* Hero Section */}
+      <section className="hero">
+        <div
+          className="hero-background"
+          style={{
+            backgroundImage: 'url(https://images.unsplash.com/photo-1562259934-6e09f6a89a98?q=80&w=2670&auto=format&fit=crop)',
+          }}
+        ></div>
+        <div className="hero-overlay"></div>
+        <div className="hero-content">
+          <p className="hero-subtitle animate-fade-in-up">Experience the Heart of</p>
+          <h1 className="hero-title animate-fade-in-up animate-delay-1">Annie Twomey's</h1>
+          <p className="hero-location animate-fade-in-up animate-delay-2">Southgate</p>
+        </div>
+
+        {/* Quick Actions Bar */}
+        <div className="quick-actions">
+          <a href="https://maps.google.com" target="_blank" rel="noopener noreferrer" className="quick-action">
+            Southgate, London
+          </a>
+          <Link to="/menu" className="quick-action">
+            View Menu
+          </Link>
+          <a href="tel:02012345678" className="quick-action">
+            020 1234 5678
+          </a>
+        </div>
+      </section>
+
+      {/* Welcome Section */}
+      <section className="section-dark">
+        <div className="container">
+          <div className="section-header reveal">
+            <h2 className="section-title">Annie Twomey's</h2>
+            <p className="section-subtitle">
+              A sports-oriented Irish pub with numerous TV screens, pool table and darts board.
+              Irish family-run and situated in the heart of Southgate.
+            </p>
+            <p className="section-subtitle" style={{ marginTop: '1rem' }}>
+              All live sport shown. Live music every weekend.
+            </p>
+            <div className="celtic-border"></div>
+            <Link to="/contact" className="btn btn-outline" style={{ marginTop: '1.5rem' }}>
+              Read More
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* Feature Cards */}
+      <section style={{ padding: 0 }}>
+        <div className="feature-grid">
+          <div className="feature-card reveal">
+            <div
+              className="feature-card-bg"
+              style={{
+                backgroundImage: 'url(https://images.unsplash.com/photo-1522778119026-d647f0596c20?q=80&w=2070)',
+              }}
+            ></div>
+            <div className="feature-card-overlay"></div>
+            <div className="feature-card-content">
+              <h3>Live Sport</h3>
+              <Link to="/live-sport" className="btn btn-primary">View Fixtures</Link>
             </div>
-          ))}
-        </div>
-      </SectionContainer>
+          </div>
 
-      {/* Menu Preview */}
-      <SectionContainer background="gray">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-          <div>
-            <h2 className="text-3xl md:text-4xl font-normal mb-6 text-brand-dark">
-              Taste the Tradition
-            </h2>
-            <p className="text-lg text-brand-gray mb-6 leading-relaxed">
-              Our kitchen serves up classic British pub favourites alongside modern dishes, all made with locally sourced ingredients from Beaconsfield and surrounding areas. From our famous Sunday roasts to fresh fish and chips, every meal is prepared with care and served with pride at the best pub in Beaconsfield.
+          <div className="feature-card reveal">
+            <div
+              className="feature-card-bg"
+              style={{
+                backgroundImage: 'url(https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?q=80&w=2070)',
+              }}
+            ></div>
+            <div className="feature-card-overlay"></div>
+            <div className="feature-card-content">
+              <h3>Live Music</h3>
+              <Link to="/whats-on" className="btn btn-primary">Find Out More</Link>
+            </div>
+          </div>
+
+          <div className="feature-card reveal">
+            <div
+              className="feature-card-bg"
+              style={{
+                backgroundImage: 'url(https://images.unsplash.com/photo-1572116469696-31de0f17cc34?q=80&w=2074)',
+              }}
+            ></div>
+            <div className="feature-card-overlay"></div>
+            <div className="feature-card-content">
+              <h3>Private Parties</h3>
+              <Link to="/private-hire" className="btn btn-primary">Book Now</Link>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Food Section */}
+      <section className="section-dark food-section">
+        <div className="container">
+          <div className="section-header reveal">
+            <h2 className="section-title">Food at Annie's</h2>
+            <p className="section-subtitle">
+              Enjoy authentic Irish fare and pub classics. From hearty stews to the perfect Sunday roast,
+              our kitchen serves up comfort food done right.
             </p>
-            <p className="text-lg text-brand-gray mb-8 leading-relaxed">
-              Whether you're craving a hearty pie, fresh seafood, or something vegetarian, our seasonal menu has something for everyone in HP9 and beyond.
+            <div className="celtic-border"></div>
+            <Link to="/menu" className="btn btn-primary" style={{ marginTop: '1.5rem' }}>
+              View Menu
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* Live Sport Banner */}
+      <section className="banner">
+        <div
+          className="banner-bg"
+          style={{
+            backgroundImage: 'url(https://images.unsplash.com/photo-1489944440615-453fc2b6a9a9?q=80&w=2066)',
+          }}
+        ></div>
+        <div className="banner-overlay"></div>
+        <div className="banner-content reveal">
+          <div className="celtic-border" style={{ marginBottom: '2rem' }}></div>
+          <h2>Live Sport</h2>
+          <p>Every game. Every screen.</p>
+          <Link to="/live-sport" className="btn btn-primary">View Fixtures</Link>
+          <div className="celtic-border" style={{ marginTop: '2rem' }}></div>
+        </div>
+      </section>
+
+      {/* What's On Section */}
+      <section className="section-dark">
+        <div className="container">
+          <div className="section-header reveal">
+            <h2 className="section-title">What's On</h2>
+            <p className="section-subtitle">
+              From live Premier League and GAA to weekend live music sessions,
+              there's always something happening at Annie Twomey's.
             </p>
-            <Link to="/menu" className="nav-link text-xl font-bold">
-              Explore Our Menu
-            </Link>
           </div>
-          <div>
-            <img
-              src="/images/oct_25/food-nachos.jpg"
-              alt="Delicious pub food spread"
-              className="w-full h-[400px] object-cover rounded-lg shadow-lg"
-            />
-          </div>
-        </div>
-      </SectionContainer>
 
-      {/* Testimonials */}
-      <SectionContainer>
-        <h2 className="text-3xl md:text-4xl font-normal mb-12 text-brand-dark text-center">
-          What Our Guests Say
-        </h2>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {testimonials.map((testimonial, index) => (
-            <TestimonialCard key={index} {...testimonial} />
-          ))}
-        </div>
-      </SectionContainer>
+          <div className="event-grid reveal">
+            <div className="event-card">
+              <div
+                className="event-card-image"
+                style={{
+                  backgroundImage: 'url(https://images.unsplash.com/photo-1665413813194-3b80d79b6421?q=80&w=2070&auto=format&fit=crop)',
+                }}
+              ></div>
+              <div className="event-card-content">
+                <h4>Premier League</h4>
+                <p>Every match live on our big screens. Join the atmosphere for all the action.</p>
+                <Link to="/live-sport" className="btn btn-outline" style={{ padding: '0.75rem 1.5rem' }}>
+                  Find Out More
+                </Link>
+              </div>
+            </div>
 
-      {/* Call to Action */}
-      <SectionContainer background="gray">
-        <div className="text-center">
-          <h2 className="text-3xl md:text-4xl font-normal mb-6 text-brand-dark">
-            Ready for Your Visit?
-          </h2>
-          <p className="text-lg text-brand-gray mb-8 max-w-2xl mx-auto leading-relaxed">
-            Join us at The Old Swan for an unforgettable dining experience. Whether it's a quick drink, family meal, or special celebration, we're here to make your visit memorable.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-8 justify-center items-center">
-            <Link to="/book" className="nav-link text-xl font-bold">
-              Book Your Table
-            </Link>
-            <span className="hidden sm:inline text-brand-gray">•</span>
-            <Link to="/events" className="nav-link text-xl font-bold">
-              View Events
-            </Link>
+            <div className="event-card">
+              <div
+                className="event-card-image"
+                style={{
+                  backgroundImage: 'url(https://images.unsplash.com/photo-1431324155629-1a6deb1dec8d?q=80&w=2070)',
+                }}
+              ></div>
+              <div className="event-card-content">
+                <h4>Live GAA</h4>
+                <p>Catch all the hurling and football action. The best place in London for GAA.</p>
+                <Link to="/live-sport" className="btn btn-outline" style={{ padding: '0.75rem 1.5rem' }}>
+                  Find Out More
+                </Link>
+              </div>
+            </div>
+
+            <div className="event-card">
+              <div
+                className="event-card-image"
+                style={{
+                  backgroundImage: 'url(https://images.unsplash.com/photo-1511192336575-5a79af67a629?q=80&w=2064)',
+                }}
+              ></div>
+              <div className="event-card-content">
+                <h4>Weekend Live Music</h4>
+                <p>Live bands and traditional Irish sessions every Friday and Saturday night.</p>
+                <Link to="/whats-on" className="btn btn-outline" style={{ padding: '0.75rem 1.5rem' }}>
+                  Find Out More
+                </Link>
+              </div>
+            </div>
           </div>
         </div>
-      </SectionContainer>
+      </section>
+
+      {/* Private Hire Banner */}
+      <section className="split-banner">
+        <div className="split-banner-images">
+          <div
+            className="split-image"
+            style={{
+              backgroundImage: 'url(https://images.unsplash.com/photo-1555396273-367ea4eb4db5?q=80&w=2074)',
+            }}
+          ></div>
+          <div
+            className="split-image"
+            style={{
+              backgroundImage: 'url(https://images.unsplash.com/photo-1525268323446-0505b6fe7778?q=80&w=2072)',
+            }}
+          ></div>
+        </div>
+        <div className="banner-overlay"></div>
+        <div className="banner-content reveal">
+          <h2>Private Hire</h2>
+          <p>Host your event with us</p>
+          <Link to="/private-hire" className="btn btn-primary">Enquire Now</Link>
+        </div>
+      </section>
+
+      {/* Newsletter Section */}
+      <section className="newsletter">
+        <div className="container">
+          <div className="section-header reveal">
+            <h2 className="section-title">News & Offers</h2>
+            <p className="section-subtitle">
+              Stay up to date with the latest from Annie Twomey's. Sign up to our mailing list.
+            </p>
+            <form className="newsletter-form" onSubmit={(e) => e.preventDefault()}>
+              <input
+                type="email"
+                placeholder="Enter your email"
+                className="newsletter-input"
+                required
+              />
+              <button type="submit" className="btn btn-primary">Sign Up</button>
+            </form>
+          </div>
+        </div>
+      </section>
     </main>
   );
 };

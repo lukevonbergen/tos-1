@@ -1,390 +1,159 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Helmet } from 'react-helmet';
-import PageHero from '../components/PageHero';
-import SectionContainer from '../components/SectionContainer';
-import MenuItem from '../components/MenuItem';
 
 const Menu = () => {
-  const whileYouWait = [
-    {
-      name: "Scampi",
-      description: "",
-      price: "5.00"
-    },
-    {
-      name: "Bread & Oil",
-      description: "",
-      price: "5.00",
-      isVegetarian: true
-    },
-    {
-      name: "Olives",
-      description: "",
-      price: "4.00",
-      isVegetarian: true
-    }
-  ];
+  useEffect(() => {
+    window.scrollTo(0, 0);
+
+    const reveals = document.querySelectorAll('.reveal');
+    const revealOnScroll = () => {
+      reveals.forEach(element => {
+        const windowHeight = window.innerHeight;
+        const elementTop = element.getBoundingClientRect().top;
+        const revealPoint = 150;
+        if (elementTop < windowHeight - revealPoint) {
+          element.classList.add('visible');
+        }
+      });
+    };
+    window.addEventListener('scroll', revealOnScroll);
+    revealOnScroll();
+    return () => window.removeEventListener('scroll', revealOnScroll);
+  }, []);
 
   const starters = [
-    {
-      name: "Garlic and Herb King Prawns",
-      description: "Served with freshly baked rustic bread",
-      price: "10.00"
-    },
-    {
-      name: "Wild Mushroom Arancini",
-      description: "With truffle mayo and parmesan",
-      price: "8.00",
-      isVegetarian: true
-    },
-    {
-      name: "Bubble & Squeak",
-      description: "Hollandaise, smoked bacon, poached egg",
-      price: "8.00/15.00"
-    },
-    {
-      name: "Sausage Rolls",
-      description: "With gravy",
-      price: "7.50"
-    },
-    {
-      name: "Baked Goats Cheese & Beetroot Salad",
-      description: "With rocket, candied walnuts and balsamic glaze",
-      price: "9.00/14.00",
-      isVegetarian: true
-    },
-    {
-      name: "Soup of the Day",
-      description: "With rustic bread and butter",
-      price: "7.00",
-      isVegetarian: true
-    }
+    { name: "Homemade Soup of the Day", description: "Served with crusty bread", price: "6.50" },
+    { name: "Irish Soda Bread & Butter", description: "Freshly baked", price: "4.50" },
+    { name: "Chicken Wings", description: "Choice of BBQ or Buffalo sauce", price: "8.50" },
+    { name: "Loaded Nachos", description: "Cheese, jalapenos, salsa, sour cream", price: "9.00" },
+    { name: "Garlic Mushrooms", description: "On toasted sourdough", price: "7.50" },
   ];
 
   const mains = [
-    {
-      name: "Beer Battered Fish and Chips",
-      description: "Peas and tartar sauce",
-      price: "15.00"
-    },
-    {
-      name: "King Prawn, Chilli & Herb Linguini",
-      description: "With roasted garlic, cherry tomatoes and herb sauce",
-      price: "16.00"
-    },
-    {
-      name: "Beef or Chicken Burger",
-      description: "Brioche bun with cheese, baby gem, tomato, gherkin and rustic fries. Add bacon +£1.50",
-      price: "15.00"
-    },
-    {
-      name: "10oz Sirloin Steak",
-      description: "Vine roasted cherry tomatoes, sautéed mushrooms, onion rings, peppercorn sauce and rustic fries",
-      price: "25.00"
-    },
-    {
-      name: "Halls of Hazelmere Sausages",
-      description: "Mash, seasonal veg, and caramelised onion gravy",
-      price: "15.00"
-    },
-    {
-      name: "Braised Lamb Shank",
-      description: "Rosemary mash, roasted veg and red wine jus",
-      price: "22.00"
-    },
-    {
-      name: "Chicken, Leek & Mushroom Pie",
-      description: "With creamy mash potatoes and seasonal greens",
-      price: "16.00"
-    }
+    { name: "Annie's Irish Stew", description: "Slow-cooked lamb, root vegetables, served with crusty bread", price: "15.00" },
+    { name: "Fish & Chips", description: "Beer-battered cod, mushy peas, tartare sauce", price: "14.50" },
+    { name: "Beef & Guinness Pie", description: "Shortcrust pastry, creamy mash, seasonal veg", price: "15.00" },
+    { name: "Bangers & Mash", description: "Cumberland sausages, onion gravy, garden peas", price: "13.50" },
+    { name: "Chicken & Bacon Club", description: "Triple-decker, fries, coleslaw", price: "12.50" },
+    { name: "8oz Burger", description: "Beef patty, brioche bun, lettuce, tomato, fries (add cheese/bacon +£1)", price: "14.00" },
+    { name: "Veggie Burger", description: "Plant-based patty, brioche bun, fries", price: "13.00" },
   ];
 
-  const sharingSnacks = [
-    {
-      name: "BBQ Glazed Sticky Chicken Wings",
-      description: "With hot sauce",
-      price: "12.00"
-    },
-    {
-      name: "Baked Camembert",
-      description: "With red onion chutney and rustic bread",
-      price: "12.00",
-      isVegetarian: true
-    },
-    {
-      name: "Nachos",
-      description: "Tortilla chips, melted cheese, salsa, sour cream and guacamole",
-      price: "12.00",
-      isVegetarian: true
-    },
-    {
-      name: "A Taste of the Sea",
-      description: "Selection of prawns, squid tentacles, mussels, crab & catch of the day with savoury rice, fries, house dips and lemon wedge",
-      price: "25.00"
-    },
-    {
-      name: "All the Meats",
-      description: "Selection of tender BBQ glazed pork ribs, spicy chicken wings, pigs in blankets, chicken tenders, sausage rolls, fries, onion rings & our house dips",
-      price: "22.00"
-    }
-  ];
-
-  const desserts = [
-    {
-      name: "Malva Pudding",
-      description: "Traditional SA dessert",
-      price: "6.50",
-      isVegetarian: true
-    },
-    {
-      name: "Chocolate Brownie",
-      description: "",
-      price: "6.50",
-      isVegetarian: true
-    },
-    {
-      name: "Ice Cream",
-      description: "Chocolate, strawberry, vanilla",
-      price: "5.00",
-      isVegetarian: true
-    },
-    {
-      name: "Apple Crumble",
-      description: "With custard",
-      price: "7.50",
-      isVegetarian: true
-    },
-    {
-      name: "Sorbet",
-      description: "Lemon, raspberry",
-      price: "5.00",
-      isVegetarian: true
-    }
+  const sundayRoast = [
+    { name: "Roast Beef", description: "With all the trimmings", price: "16.00" },
+    { name: "Roast Chicken", description: "With all the trimmings", price: "15.00" },
+    { name: "Roast Pork", description: "With crackling and all the trimmings", price: "15.00" },
   ];
 
   const sides = [
-    {
-      name: "Rustic Fries",
-      description: "",
-      price: "4.50",
-      isVegetarian: true
-    },
-    {
-      name: "Mash",
-      description: "",
-      price: "4.50",
-      isVegetarian: true
-    },
-    {
-      name: "Roasted Carrots & Parsnips",
-      description: "",
-      price: "5.00",
-      isVegetarian: true
-    },
-    {
-      name: "Mixed Salad",
-      description: "",
-      price: "4.50",
-      isVegetarian: true
-    },
-    {
-      name: "Seasonal Greens",
-      description: "",
-      price: "5.00",
-      isVegetarian: true
-    }
+    { name: "Fries", price: "4.00" },
+    { name: "Sweet Potato Fries", price: "4.50" },
+    { name: "Onion Rings", price: "4.00" },
+    { name: "Seasonal Vegetables", price: "4.50" },
+    { name: "Side Salad", price: "4.00" },
   ];
 
-  const kidsMenu = [
-    {
-      name: "Chicken Tenders",
-      description: "Southern fried",
-      price: "7.00"
-    },
-    {
-      name: "Fish Goujons",
-      description: "",
-      price: "7.00"
-    },
-    {
-      name: "Kids Burger",
-      description: "",
-      price: "7.00"
-    }
+  const desserts = [
+    { name: "Sticky Toffee Pudding", description: "Vanilla ice cream", price: "7.00" },
+    { name: "Apple Crumble", description: "Custard", price: "6.50" },
+    { name: "Chocolate Brownie", description: "With cream", price: "6.50" },
   ];
+
+  const MenuItem = ({ name, description, price }) => (
+    <div className="menu-item">
+      <div className="menu-item-info">
+        <h4 className="menu-item-name">{name}</h4>
+        {description && <p className="menu-item-description">{description}</p>}
+      </div>
+      <span className="menu-item-price">£{price}</span>
+    </div>
+  );
 
   return (
-    <main className="pt-32">
+    <main>
       <Helmet>
-        <title>Menu - Food Beaconsfield | Traditional British Pub Food & Sunday Roasts | The Old Swan HP9</title>
-        <meta name="description" content="Delicious traditional British pub food at The Old Swan Beaconsfield. Fresh local ingredients, Sunday roasts, fish & chips, steaks. Best food in Beaconsfield HP9. Book your table!" />
-        <meta name="keywords" content="food Beaconsfield, pub food Beaconsfield, Sunday roast Beaconsfield, fish and chips HP9, steak Beaconsfield, British food near me, restaurant Beaconsfield, dining HP9" />
-        <meta property="og:title" content="Traditional British Pub Food Menu - The Old Swan Beaconsfield" />
-        <meta property="og:description" content="Discover our seasonal menu featuring classic British pub favorites, fresh local ingredients, and exceptional Sunday roasts in the heart of Beaconsfield." />
-        <meta property="og:type" content="restaurant.menu" />
-        <link rel="canonical" href="https://theoldswanbeaconsfield.co.uk/menu" />
+        <title>Menu | Annie Twomey's - Irish Pub Southgate</title>
+        <meta name="description" content="Traditional Irish fare and pub classics at Annie Twomey's. From hearty stews to Sunday roasts, enjoy comfort food done right in Southgate, London." />
       </Helmet>
-      <PageHero
-        title="Our Menu - Food Beaconsfield"
-        subtitle="Discover our selection of traditional British pub classics in Beaconsfield, made with locally sourced ingredients and served with pride. From hearty mains to indulgent desserts, we have exceptional food for everyone in HP9."
-        imageSrc="/images/oct_25/food-flatbreads.jpg"
-        imageAlt="Delicious food at The Old Swan"
-        textAlign="left"
-      />
 
-      {/* SEO H1 */}
-      <h1 className="sr-only">Traditional British Pub Food Menu Beaconsfield - Fresh Local Ingredients, Sunday Roasts & Classic Dishes at The Old Swan HP9</h1>
-      
-      {/* Menu Note */}
-      <SectionContainer background="gray">
-        <div className="text-center mb-8">
-          <p className="text-lg text-brand-gray leading-relaxed max-w-3xl mx-auto">
-            All our delicious food dishes are prepared fresh daily at our Beaconsfield kitchen using locally sourced ingredients from HP9 suppliers where possible. 
-            Please inform our staff of any allergies or dietary requirements.
-          </p>
-          <div className="flex justify-center gap-6 mt-6 text-sm">
-            <span className="flex items-center gap-2">
-              <span className="bg-green-100 text-green-700 px-2 py-1 rounded text-xs">V</span>
-              Vegetarian
-            </span>
-            <span className="flex items-center gap-2">
-              <span className="bg-green-200 text-green-800 px-2 py-1 rounded text-xs">VE</span>
-              Vegan
-            </span>
-            <span className="flex items-center gap-2">
-              <span className="bg-blue-100 text-blue-700 px-2 py-1 rounded text-xs">GF</span>
-              Gluten Free
-            </span>
+      {/* Hero Section */}
+      <section className="page-hero">
+        <div
+          className="hero-background"
+          style={{
+            backgroundImage: 'url(https://images.unsplash.com/photo-1504674900247-0877df9cc836?q=80&w=2070)',
+          }}
+        ></div>
+        <div className="hero-overlay"></div>
+        <div className="hero-content">
+          <h1 className="hero-title">Our Menu</h1>
+          <p className="hero-location">Traditional Irish fare & pub classics</p>
+        </div>
+      </section>
+
+      {/* Menu Sections */}
+      <section className="section-dark menu-section">
+        <div className="container">
+          {/* Starters */}
+          <div className="menu-category reveal">
+            <h2 className="menu-category-title">Starters</h2>
+            {starters.map((item, index) => (
+              <MenuItem key={index} {...item} />
+            ))}
           </div>
-        </div>
-      </SectionContainer>
 
-      {/* While You Wait */}
-      <SectionContainer>
-        <h2 className="sticky top-32 bg-white z-10 py-4 text-3xl md:text-4xl font-normal mb-8 text-brand-dark text-center">
-          While You Wait
-        </h2>
-        <div className="max-w-4xl mx-auto">
-          {whileYouWait.map((item, index) => (
-            <MenuItem key={index} {...item} />
-          ))}
-        </div>
-      </SectionContainer>
+          {/* Mains */}
+          <div className="menu-category reveal">
+            <h2 className="menu-category-title">Mains</h2>
+            {mains.map((item, index) => (
+              <MenuItem key={index} {...item} />
+            ))}
+          </div>
 
-      {/* Starters */}
-      <SectionContainer background="gray">
-        <h2 className="sticky top-32 bg-gray-50 z-10 py-4 text-3xl md:text-4xl font-normal mb-8 text-brand-dark text-center">
-          Starters
-        </h2>
-        <div className="max-w-4xl mx-auto">
-          {starters.map((item, index) => (
-            <MenuItem key={index} {...item} />
-          ))}
-        </div>
-      </SectionContainer>
+          {/* Sunday Roast */}
+          <div className="menu-category reveal">
+            <h2 className="menu-category-title">Sunday Roast <span style={{ fontSize: '1rem', color: 'var(--text-secondary)' }}>(Sundays Only)</span></h2>
+            <p style={{ color: 'var(--text-secondary)', marginBottom: '1.5rem', fontSize: '0.95rem' }}>
+              All served with roast potatoes, Yorkshire pudding, seasonal vegetables and gravy
+            </p>
+            {sundayRoast.map((item, index) => (
+              <MenuItem key={index} {...item} />
+            ))}
+          </div>
 
-      {/* Main Courses */}
-      <SectionContainer>
-        <h2 className="sticky top-32 bg-white z-10 py-4 text-3xl md:text-4xl font-normal mb-8 text-brand-dark text-center">
-          Main Courses
-        </h2>
-        <div className="max-w-4xl mx-auto">
-          {mains.map((item, index) => (
-            <MenuItem key={index} {...item} />
-          ))}
-        </div>
-      </SectionContainer>
+          {/* Two Column - Sides & Desserts */}
+          <div className="two-column" style={{ marginTop: '4rem' }}>
+            <div className="menu-category reveal">
+              <h2 className="menu-category-title">Sides</h2>
+              {sides.map((item, index) => (
+                <MenuItem key={index} {...item} />
+              ))}
+            </div>
 
-      {/* Sharing & Snacks */}
-      <SectionContainer background="gray">
-        <h2 className="sticky top-32 bg-gray-50 z-10 py-4 text-3xl md:text-4xl font-normal mb-8 text-brand-dark text-center">
-          Sharing & Snacks
-        </h2>
-        <div className="max-w-4xl mx-auto">
-          {sharingSnacks.map((item, index) => (
-            <MenuItem key={index} {...item} />
-          ))}
-        </div>
-      </SectionContainer>
-
-      {/* Desserts & Sides */}
-      <SectionContainer>
-        <div className="grid md:grid-cols-2 gap-12">
-          <div>
-            <h2 className="sticky top-32 bg-white z-10 py-4 text-3xl md:text-4xl font-normal mb-8 text-brand-dark text-center">
-              Desserts
-            </h2>
-            <div>
+            <div className="menu-category reveal">
+              <h2 className="menu-category-title">Desserts</h2>
               {desserts.map((item, index) => (
                 <MenuItem key={index} {...item} />
               ))}
             </div>
           </div>
-          <div>
-            <h2 className="sticky top-32 bg-white z-10 py-4 text-3xl md:text-4xl font-normal mb-8 text-brand-dark text-center">
-              Sides
-            </h2>
-            <div>
-              {sides.map((item, index) => (
-                <MenuItem key={index} {...item} />
-              ))}
-            </div>
-          </div>
-        </div>
-      </SectionContainer>
 
-      {/* Kids Menu */}
-      <SectionContainer background="gray">
-        <h2 className="sticky top-32 bg-gray-50 z-10 py-4 text-3xl md:text-4xl font-normal mb-8 text-brand-dark text-center">
-          Under 12's <span className="text-lg">(All with rustic fries)</span>
-        </h2>
-        <div className="max-w-4xl mx-auto">
-          {kidsMenu.map((item, index) => (
-            <MenuItem key={index} {...item} />
-          ))}
-        </div>
-      </SectionContainer>
-
-      {/* Booking Section */}
-      <SectionContainer background="gray">
-        <div className="text-center">
-          <h2 className="text-3xl md:text-4xl font-normal mb-6 text-brand-dark">
-            Book Your Table
-          </h2>
-          <p className="text-lg text-brand-gray mb-8 max-w-2xl mx-auto leading-relaxed">
-            Book your table instantly using our online reservation system below, or give us a call.
-          </p>
-
-          <div className="w-full max-w-4xl mx-auto mb-12" style={{ minHeight: '736px' }}>
-            <iframe
-              src="https://tableagent.com/iframe/the-old-swan/"
-              style={{ border: '0px none', minWidth: '375px', minHeight: '736px' }}
-              sandbox="allow-forms allow-modals allow-same-origin allow-scripts allow-top-navigation-by-user-activation"
-              width="100%"
-              height="100%"
-              title="Book a table at The Old Swan"
-            />
-          </div>
-
-          <div className="bg-white p-8 md:p-12 rounded-lg max-w-2xl mx-auto">
-            <h3 className="text-2xl font-normal text-brand-dark mb-4">
-              Book by Phone
-            </h3>
-            <p className="text-lg text-brand-gray mb-6">
-              Call us to reserve your table today
+          {/* Drinks Note */}
+          <div className="reveal" style={{ textAlign: 'center', marginTop: '4rem', padding: '3rem', background: 'var(--secondary-bg)', border: '1px solid var(--border-color)' }}>
+            <h3 style={{ color: 'var(--highlight-gold)', marginBottom: '1rem', textTransform: 'uppercase', letterSpacing: '2px' }}>Drinks</h3>
+            <p style={{ color: 'var(--text-secondary)', maxWidth: '600px', margin: '0 auto' }}>
+              See our full drinks menu at the bar - wide selection of Irish whiskeys, craft beers, and Guinness on draught.
             </p>
-            <a href="tel:01494312962" className="nav-link text-xl font-bold">
-              01494 312962
-            </a>
-            <div className="mt-6 text-sm text-brand-gray">
-              <p>Available during opening hours:</p>
-              <p>Monday to Thursday: 12pm – 11pm</p>
-              <p>Friday & Saturday: 12pm – Midnight</p>
-              <p>Sunday: 12pm – 9pm</p>
-            </div>
+          </div>
+
+          {/* Allergy Note */}
+          <div className="reveal" style={{ textAlign: 'center', marginTop: '3rem' }}>
+            <p style={{ color: 'var(--text-muted)', fontSize: '0.9rem' }}>
+              Please inform staff of any allergies. Menu items subject to availability.
+            </p>
           </div>
         </div>
-      </SectionContainer>
+      </section>
     </main>
   );
 };
