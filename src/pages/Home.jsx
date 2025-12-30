@@ -42,7 +42,7 @@ const Home = () => {
         <div
           className="hero-background"
           style={{
-            backgroundImage: 'url(https://images.unsplash.com/photo-1562259934-6e09f6a89a98?q=80&w=2670&auto=format&fit=crop)',
+            backgroundImage: 'url(/images/annies/homepage-hero.avif)',
           }}
         ></div>
         <div className="hero-overlay"></div>
@@ -155,7 +155,7 @@ const Home = () => {
         <div
           className="banner-bg"
           style={{
-            backgroundImage: 'url(https://images.unsplash.com/photo-1489944440615-453fc2b6a9a9?q=80&w=2066)',
+            backgroundImage: 'url(/images/annies/live-sport-bg.jpeg)',
           }}
         ></div>
         <div className="banner-overlay"></div>
